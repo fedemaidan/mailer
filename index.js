@@ -55,8 +55,6 @@ apiRoutes.post('/registrarMail', function(req, res) {
       res.json({success: true, msg: 'Mail cargado correctamente'});
     });
 
-  
-  
 });
 
 function enviarMailsPendientes() {
