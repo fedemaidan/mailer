@@ -3,7 +3,21 @@ var app         = express();
 var http = require('http').Server(app);
 var cors = require('cors');
 var cron = require('node-cron');
+var mongoose    = require('mongoose');
+var nodemailer = require('nodemailer');
 var port = 8081;
+var Mail        = require('./model/mail'); 
+var urlBaseDeRecuperacion = ""
+
+var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'fede.maidan@gmail.com',
+        pass:  '1324neco'
+    }
+}, {
+    from: 'fede.maidan@gmail.com'
+});
 
 app.listen(port);
 
@@ -16,9 +30,30 @@ apiRoutes.use(cors())
 
 apiRoutes.post('/registrarMail', function(req, res) {
   var datos = req.body
+  var urlDeRecuperacion = urlBaseDeRecuperacion + "?user=" + datos.username + "&token=" + datos.token
 
-  res.json({success: true, msg: 'Mail cargado correctamente'});
+  console.log(urlDeRecuperacion);
+
+  var mail = new Mail({
+      to: datos.mail,
+      subject: "Cambio de contraseña de " + datos.username,
+      text: "Cambiar contraseña: " + urlDeRecuperacion,
+      html: "<p> Cambio contraseña HTML : "+ urlDeRecuperacion
+    });
+    
+    mail.save(function(err) {
+      if (err) {
+        return res.json({success: false, msg: err.message});
+      }
+      res.json({success: true, msg: 'Mail cargado correctamente'});
+    });
+
+  
   
 });
+
+function enviarMailsPendientes() {
+	/* por cada registro multiml enviar un mail y despues borrar registro */
+}
 
 app.use('', apiRoutes);
