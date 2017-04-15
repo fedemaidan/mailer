@@ -35,25 +35,24 @@ apiRoutes.use(cors())
 
 apiRoutes.post('/registrarMail', function(req, res) {
   var datos = req.body
-  console.log(req.body)
-  console.log(datos)
-  // var urlDeRecuperacion = urlBaseDeRecuperacion + "?user=" + datos.username + "&token=" + datos.token
+  
+  var urlDeRecuperacion = urlBaseDeRecuperacion + "?user=" + datos.username + "&token=" + datos.token
 
-  // console.log(urlDeRecuperacion);
+  console.log(urlDeRecuperacion);
 
-  // var mail = new Mail({
-  //     to: datos.mail,
-  //     subject: "Cambio de contraseña de " + datos.username,
-  //     text: "Cambiar contraseña: " + urlDeRecuperacion,
-  //     html: "<p> Cambio contraseña HTML : "+ urlDeRecuperacion
-  //   });
+  var mail = new Mail({
+      to: datos.mail,
+      subject: "Cambio de contraseña de " + datos.username,
+      text: "Cambiar contraseña: " + urlDeRecuperacion,
+      html: "<p> Cambio contraseña HTML : "+ urlDeRecuperacion
+    });
     
-  //   mail.save(function(err) {
-  //     if (err) {
-  //       return res.json({success: false, msg: err.message});
-  //     }
-  //     res.json({success: true, msg: 'Mail cargado correctamente'});
-  //   });
+    mail.save(function(err) {
+      if (err) {
+        return res.json({success: false, msg: err.message});
+      }
+      res.json({success: true, msg: 'Mail cargado correctamente'});
+    });
 
   
   
