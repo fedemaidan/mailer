@@ -47,7 +47,7 @@ apiRoutes.post('/registrarMail', function(req, res) {
       html: "<p> Cambio contraseña HTML : "+ urlDeRecuperacion
     });
     
-    mail.save(function(err) {
+    mail.save().then(function(err) {
       if (err) {
         return res.json({success: false, msg: err.message});
       }
