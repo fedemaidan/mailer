@@ -8,7 +8,7 @@ var nodemailer = require('nodemailer');
 var bodyParser  = require('body-parser');
 var port = 8081;
 var Mail        = require('./model/mail'); 
-var urlBaseDeRecuperacion = ""
+var urlBaseDeRecuperacion = "multiml.com/api/confirmaRecuperarContrasena"
 
 // get our request parameters
 app.use(bodyParser.urlencoded({ extended: false }));
