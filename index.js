@@ -65,14 +65,21 @@ function enviarMailsPendientes() {
 	Mail.find( {} , (err, mails) => {
     mails.forEach( ( mail ) => {
       console.log(mail)
-      // transporter.sendMail(mail, (error, info) => {
-      //   if (error) {
-      //       console.log(error.message);
-      //       return;
-      //   }
+      let mensaje = {
+        to: mail.mail,
+        subject: mail.subject,
+        text: mail.text,
+        html: mail.html
+      }
+
+      transporter.sendMail(mensaje, (error, info) => {
+        if (error) {
+            console.log(error.message);
+            return;
+        }
       
-      //   transporter.close();
-      // });
+        transporter.close();
+      });
           
     })
   });
