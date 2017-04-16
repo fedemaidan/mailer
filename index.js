@@ -66,7 +66,7 @@ function enviarMailsPendientes() {
     mails.forEach( ( mail ) => {
       console.log(mail)
       let mensaje = {
-        to: mail.mail,
+        to: mail.to,
         subject: mail.subject,
         text: mail.text,
         html: mail.html
