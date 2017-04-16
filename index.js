@@ -64,16 +64,16 @@ apiRoutes.post('/registrarMail', function(req, res) {
 function enviarMailsPendientes() {
 	Mail.find( {} , (err, mails) => {
     mails.forEach( ( mail ) => {
-      console.log(mail)
+      
       let mensaje = {
         to: mail.to,
         subject: mail.subject,
         text: mail.text,
         html: mail.html
       }
-      console.log(mensaje);
+      
       transporter.sendMail(mensaje, (error, info) => {
-        console.log(info)
+        
         if (error) {
             console.log(error.message);
             return;
