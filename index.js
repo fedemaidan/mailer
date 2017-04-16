@@ -21,8 +21,8 @@ mongoose.connect(config.database);
 var transporter = nodemailer.createTransport(smtpTransport({
     service: 'gmail',
     auth: {
-        user: 'fede.maidan@gmail.com',
-        pass:  '1324neco'
+        user: 'federico.maidan@tecnorespuestas.com.ar',
+        pass:  '4050neco'
     }
   })
 );
