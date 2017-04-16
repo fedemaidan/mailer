@@ -3,6 +3,7 @@ var app         = express();
 var http = require('http').Server(app);
 var cors = require('cors');
 var cron = require('node-cron');
+var smtpTransport = require('nodemailer-smtp-transport');
 var mongoose    = require('mongoose');
 var nodemailer = require('nodemailer');
 var bodyParser  = require('body-parser');
@@ -17,15 +18,14 @@ app.use(bodyParser.json());
 
 mongoose.connect(config.database);
 
-var transporter = nodemailer.createTransport({
-    service: 'Gmail',
+var transporter = nodemailer.createTransport(smtpTransport({
+    service: 'gmail',
     auth: {
         user: 'fede.maidan@gmail.com',
         pass:  '1324neco'
     }
-}, {
-    from: 'fede.maidan@gmail.com'
-});
+  })
+);
 
 app.listen(port);
 
