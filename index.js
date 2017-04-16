@@ -53,6 +53,7 @@ apiRoutes.post('/registrarMail', function(req, res) {
     
     mail.save(function(err) {
     	console.log("cargo mail")
+      console.log(err)
       if (err) {
         console.log(err)
         return res.json({success: false, msg: err.message});
