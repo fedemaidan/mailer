@@ -78,7 +78,13 @@ function enviarMailsPendientes() {
             console.log(error.message);
             return;
         }
-      
+        Mail.remove( {_id: mail._id}, (err) => {
+          if (err)
+            console.log(err)
+          else
+            console.log("Removi")
+        } )
+
         transporter.close();
       });
           
