@@ -6,6 +6,7 @@ var cron = require('node-cron');
 var mongoose    = require('mongoose');
 var nodemailer = require('nodemailer');
 var bodyParser  = require('body-parser');
+var config      = require('./config/database'); 
 var port = 8081;
 var Mail        = require('./model/mail'); 
 var urlBaseDeRecuperacion = "multiml.com/api/confirmaRecuperarContrasena"
@@ -13,6 +14,8 @@ var urlBaseDeRecuperacion = "multiml.com/api/confirmaRecuperarContrasena"
 // get our request parameters
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+mongoose.connect(config.database);
 
 var transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -45,9 +48,9 @@ apiRoutes.post('/registrarMail', function(req, res) {
       to: datos.mail,
       subject: "Cambio de contraseña de " + datos.username,
       text: "Cambiar contraseña: " + urlDeRecuperacion,
-      html: "<p> Cambio contraseña HTML : <a href="+ urlDeRecuperacion + "> Link </a></p>"
+      html: "<p> Cambio contraseña HTML : <a href=\""+ urlDeRecuperacion + "\"> Link </a></p>"
     });
-    console.log(mail)
+    
     mail.save(function(err) {
     	console.log("cargo mail")
       if (err) {
