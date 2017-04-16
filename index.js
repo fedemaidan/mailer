@@ -42,8 +42,6 @@ apiRoutes.post('/registrarMail', function(req, res) {
   
   var urlDeRecuperacion = urlBaseDeRecuperacion + "?user=" + datos.username + "&token=" + datos.token
 
-  console.log(urlDeRecuperacion);
-  console.log(datos)
   var mail = new Mail({
       to: datos.mail,
       subject: "Cambio de contraseña de " + datos.username,
@@ -64,7 +62,20 @@ apiRoutes.post('/registrarMail', function(req, res) {
 });
 
 function enviarMailsPendientes() {
-	/* por cada registro multiml enviar un mail y despues borrar registro */
+	Mail.find( {} , (err, mails) => {
+    mails.forEach( ( mail ) => {
+      
+      transporter.sendMail(mail, (error, info) => {
+        if (error) {
+            console.log(error.message);
+            return;
+        }
+      
+        transporter.close();
+      });
+          
+    })
+  });
 }
 
 app.use('', apiRoutes);
