@@ -34,7 +34,7 @@ var apiRoutes = express.Router();
 apiRoutes.use(cors())
 
 apiRoutes.post('/registrarMail', function(req, res) {
-  
+
   var datos = req.body
   
   var urlDeRecuperacion = urlBaseDeRecuperacion + "?user=" + datos.username + "&token=" + datos.token
@@ -47,7 +47,7 @@ apiRoutes.post('/registrarMail', function(req, res) {
       text: "Cambiar contraseña: " + urlDeRecuperacion,
       html: "<p> Cambio contraseña HTML : <a href="+ urlDeRecuperacion + "> Link </a></p>"
     });
-    
+    console.log(mail)
     mail.save(function(err) {
     	console.log("cargo mail")
       if (err) {
