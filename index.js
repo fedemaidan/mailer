@@ -56,9 +56,9 @@ apiRoutes.post('/registrarMail', function(req, res) {
       console.log(err)
       if (err) {
         console.log(err)
-        return res.json({success: false, msg: err.message});
+        res.send({success: false, msg: err.message});
       }
-      return res.json({success: true, msg: 'Mail cargado correctamente'});
+      res.send({success: true, msg: 'Mail cargado correctamente'});
     });
 
 });
