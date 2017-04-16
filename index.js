@@ -71,8 +71,9 @@ function enviarMailsPendientes() {
         text: mail.text,
         html: mail.html
       }
-
+      console.log(mensaje);
       transporter.sendMail(mensaje, (error, info) => {
+        console.log(info)
         if (error) {
             console.log(error.message);
             return;
